@@ -16,7 +16,7 @@ except ImportError:
     from urlparse import urlparse
 
 VERSION = '1'
-COOKIE_NAME = '__utmmobile'
+COOKIE_NAME = settings.GOOGLE_ANALYTICS.get('COOKIE_NAME', '__utmmobile')
 COOKIE_PATH = '/'
 COOKIE_USER_PERSISTENCE = 63072000
 CAMPAIGN_PARAMS_KEY = 'ga_campaign_params'
