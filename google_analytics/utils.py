@@ -103,6 +103,7 @@ def build_ga_params(
         'cid': visitor_id,
         'uip': custom_uip or client_ip,
         'ni': ni,
+        'aip': 1,
     }
 
     # add user ID if exists
