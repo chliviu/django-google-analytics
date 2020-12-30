@@ -39,7 +39,10 @@ def google_analytics(context, tracking_code=None, debug=False):
             del query[param]
     query = urlencode(query)
     new_url = parsed_url._replace(query=query)
-    params['p'] = new_url.geturl()
+    if settings.GOOGLE_ANALYTICS.get('ABSOLUTE_URI', False):
+        params['p'] = new_url.geturl()
+    else:
+        params['p'] = request.build_absolute_uri(new_url.geturl())
     params['tracking_code'] = tracking_code or settings.GOOGLE_ANALYTICS[
         'google_analytics_id']
     # append the debug parameter if requested
