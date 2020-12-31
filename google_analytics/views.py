@@ -4,6 +4,7 @@ from functools import reduce
 
 import requests
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.cache import never_cache
 from google_analytics.utils import build_ga_params, set_cookie
@@ -30,7 +31,10 @@ def get_ip(remote_address):
 
 def google_analytics_request(request, response, path=None, event=None):
     # get the account id
-    account = request.GET.get('tracking_code')
+    account = request.GET.get(
+        'tc',
+        settings.GOOGLE_ANALYTICS['google_analytics_id'],
+    )
 
     params = build_ga_params(request, account, event=event)
 
